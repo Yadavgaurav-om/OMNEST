@@ -24,7 +24,7 @@ exports.authUser = asyncHandler(async (req, res) => {
 
 // User registration
 exports.registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password , isAdmin} = req.body;
 
     // Ensure only emails with '@orangemantra.in' domain can register
     if (!email.endsWith('@orangemantra.in')) {
@@ -39,7 +39,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
         throw new Error('User already exists');
     }
 
-    const user = await User.create({ name, email, password });
+    const user = await User.create({ name, email, password , isAdmin });
 
     if (user) {
         res.status(201).json({
